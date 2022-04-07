@@ -39,7 +39,7 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GH_CR }}
       - name: Push docker image
-        run: docker push ${{env.image-name }}
+        run: docker push ${{ env.image-name }}
 
       # Runs a set of commands using the runners shell
       - name: Done 
