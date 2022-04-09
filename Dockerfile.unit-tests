@@ -1,0 +1,20 @@
+ARG VERSION=5.0-alpine
+
+FROM mcr.microsoft.com/dotnet/sdk:${VERSION} AS build
+WORKDIR /code
+
+#copy and restore for testing
+COPY ["DanApi/DanApi.csproj", "DanApi/DanApi.csproj"]
+COPY ["test/DanApi.UnitTests/DanApi.UnitTests.csproj", "test/DanApi.UnitTests/DanApi.UnitTests.csproj"]
+
+RUN dotnet restore "DanApi/DanApi.csproj" -r linux-musl-x64
+RUN dotnet restore "test/DanApi.UnitTests/DanApi.UnitTests.csproj" -r linux-musl-x64
+COPY . .
+
+#RUN dotnet build "DanApi/DanApi.csproj" -c Release -r linux-musl-x64 --no-restore
+#RUN dotnet build "test/DanApi.UnitTests/DanApi.UnitTests.csproj" -c Release -r linux-musl-x64 --no-restore
+
+#Unit test runner
+FROM build AS unit-test
+WORKDIR /code/test/DanApi.UnitTests
+ENTRYPOINT dotnet test -c Release --runtime linux-musl-x64 --no-restore --logger "trx;LogFileName=test_results_unit_test.trx"

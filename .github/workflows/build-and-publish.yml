@@ -50,6 +50,18 @@ jobs:
       - name: Push docker image
         run: docker push ${{ env.image-name }}
 
+      - name: Unit tests [build]
+        run: docker build -f Dockerfile.unit-tests --target unit-test -t ${{ env.image-name-unit-tests }} .
+      
+      - name: Unit tests [run]
+        run: docker run --rm -v ${{ github.workspace }}/path/to/artifacts/testresults:/code/test/DanApi.UnitTests/TestResults ${{ env.image-name-unit-tests }}
+      
+      - name: Unit tests [results]  
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: unit-test-results
+          path: ${{ github.workspace }}/path/to/artifacts/testresults/test_results_unit_test.trx
       # Runs a set of commands using the runners shell
       - name: Done 
         run: |
