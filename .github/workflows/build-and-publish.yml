@@ -79,7 +79,6 @@ jobs:
           CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
         with:
           coverageLocations: ${{ github.workspace }}/path/to/artifacts/testresults/coverage.info:lcov
-          prefix: /code/
 
       # Runs a set of commands using the runners shell
       - name: Done 
