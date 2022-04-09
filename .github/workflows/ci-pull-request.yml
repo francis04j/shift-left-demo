@@ -7,6 +7,7 @@ on:
   workflow_dispatch:
 
 env:
+  image-name: ghcr.io/francis04j/shift-left-demo:${{ github.sha }}
   image-name-unit-tests: ghcr.io/francis04j/shift-demo-unit-tests:latest
 
 jobs:
@@ -19,6 +20,17 @@ jobs:
         with:
           # Disabling shallow clone is recommended for improving relevancy of reporting
           fetch-depth: 0
+      - name: App [build]
+        run: docker build -t ${{ env.image-name }} .
+
+      - name: App [scan]
+        uses: azure/container-scan@v0
+        with:
+          image-name: ${{ env.image-name }}
+          severity-threshold: MEDIUM
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GH_CR }}
+              
       - name: Unit tests [build]
         run: docker build --target unit-test -t ${{ env.image-name-unit-tests }} .
 
