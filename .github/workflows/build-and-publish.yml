@@ -72,6 +72,13 @@ jobs:
           path: ${{ github.workspace }}/path/to/artifacts/testresults/test_results_unit_test.trx
           reporter: dotnet-trx
           token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Code coverage [codecov]
+        uses: codecov/codecov-action@v1.2.1
+        with:
+          files: ${{ github.workspace }}/path/to/artifacts/testresults/coverage.info
+          verbose: true
+          
       # Runs a set of commands using the runners shell
       - name: Done 
         run: |

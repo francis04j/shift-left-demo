@@ -25,7 +25,10 @@ WORKDIR /code/test/DanApi.UnitTests
 ENTRYPOINT dotnet test -c Release --runtime linux-musl-x64 \
     --no-restore \
     --no-build \
-    --logger "trx;LogFileName=test_results_unit_test.trx"
+    --logger "trx;LogFileName=test_results_unit_test.trx" \
+    -p:CollectCoverage=true \
+    -p:CoverletOutput="TestResults/coverage.info" \
+    -p:CoverletOuputFormat=\"lcov,opencover\"
 
 FROM build AS publish
 RUN dotnet publish "DanApi/DanApi.csproj" -c Release -o /app/out --no-restore -r linux-musl-x64 -p:PublishReadyToRun=true --self-contained=true -p:PublishTrimmed=True
