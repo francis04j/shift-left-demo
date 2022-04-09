@@ -76,6 +76,7 @@ jobs:
       - name: Code coverage [codecov]
         uses: codecov/codecov-action@v2
         with:
+          token: ${{ secrets.CODECOV_TOKEN }}
           files: ${{ github.workspace }}/path/to/artifacts/testresults/coverage.info
           verbose: true
 
