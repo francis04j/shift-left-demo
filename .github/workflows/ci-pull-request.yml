@@ -30,16 +30,17 @@ jobs:
           severity-threshold: MEDIUM
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GH_CR }}
-              
+
       - name: Unit tests [build]
         run: docker build --target unit-test -t ${{ env.image-name-unit-tests }} .
 
       - name: Unit tests [run]
         run: docker run --rm -v ${{ github.workspace }}/path/to/artifacts/testresults:/code/test/DanApi.UnitTests/TestResults ${{ env.image-name-unit-tests }}
 
-      - name: Code coverage [codecov]
-        uses: codecov/codecov-action@v2
+      - name: Code coverage [Code Climate]
+        uses: paambaati/codeclimate-action@v2.7.5
+        env: 
+          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: ${{ github.workspace }}/path/to/artifacts/testresults/coverage.info
-          verbose: true
+          coverageLocations: ${{ github.workspace }}/path/to/artifacts/testresults/coverage.info:lcov
+          prefix: /code/
