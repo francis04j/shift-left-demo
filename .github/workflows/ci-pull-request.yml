@@ -44,3 +44,14 @@ jobs:
         with:
           coverageLocations: ${{ github.workspace }}/path/to/artifacts/testresults/coverage.info:lcov
           prefix: /code/
+      
+      - name: App [build]
+        run: docker build -t ${{ env.image-name }} .
+
+      - name: App [scan]
+        uses: azure/container-scan@v0
+        with:
+          image-name: ${{ env.image-name }}
+          severity-threshold: MEDIUM
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GH_CR }}

@@ -73,12 +73,13 @@ jobs:
           reporter: dotnet-trx
           token: ${{ secrets.GITHUB_TOKEN }}
       
-      - name: Code coverage [codecov]
-        uses: codecov/codecov-action@v2
+      - name: Code coverage [Code Climate]
+        uses: paambaati/codeclimate-action@v2.7.5
+        env:
+          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: ${{ github.workspace }}/path/to/artifacts/testresults/coverage.info
-          verbose: true
+          coverageLocations: ${{ github.workspace }}/path/to/artifacts/testresults/coverage.info:lcov
+          prefix: /code/
 
       # Runs a set of commands using the runners shell
       - name: Done 
