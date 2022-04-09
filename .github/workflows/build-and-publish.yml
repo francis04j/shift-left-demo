@@ -15,7 +15,7 @@ on:
 
 env:
   image-name: ghcr.io/francis04j/shift-left-demo:${{ github.sha }}
-  image-name-unit-tests: ghcr.io/francis04j/shift-left-demo:unit-tests${{ github.sha }}
+  image-name-unit-tests: ghcr.io/francis04j/shift-demo-unit-tests:latest
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -52,7 +52,7 @@ jobs:
         run: docker push ${{ env.image-name }}
 
       - name: Unit tests [build]
-        run: docker build -f Dockerfile.unit-tests --target unit-test -t ${{ env.image-name-unit-tests }} .
+        run: docker build --target unit-test -t ${{ env.image-name-unit-tests }} .
       
       - name: Unit tests [run]
         run: docker run --rm -v ${{ github.workspace }}/path/to/artifacts/testresults:/code/test/DanApi.UnitTests/TestResults ${{ env.image-name-unit-tests }}
