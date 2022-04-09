@@ -52,7 +52,7 @@ jobs:
         run: docker push ${{ env.image-name }}
 
       - name: Unit tests [build]
-        run: docker build -f Dockerfile.unit-tests --target unit-test -t ${{ env.image-name-unit-tests }}
+        run: docker build -f Dockerfile.unit-tests --target unit-test -t ${{ env.image-name-unit-tests }} .
       
       - name: Unit tests [run]
         run: docker run --rm -v ${{ github.workspace }}/path/to/artifacts/testresults:/code/test/DanApi.UnitTests/TestResults ${{ env.image-name-unit-tests }}
