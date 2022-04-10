@@ -1,0 +1,6 @@
+name: DanApi.infra
+runtime: dotnet
+description: Infra for DanApi
+config:
+  azure-native:location: uksouth
+  DanApi.infra:docker-image: ghcr.io/francis04j/shift-left-demo:ce9194786bf3a22989f838def31dac00fcfb2f3c

@@ -1,0 +1,8 @@
+config:
+  DanApi.infra:docker-image: ghcr.io/francis04j/shift-left-demo:ce9194786bf3a22989f838def31dac00fcfb2f3c
+  azure-native:clientId: 3551997e-c2e1-4dcc-8a33-233d096ea0b5
+  azure-native:clientSecret:
+    secure: AAABANtmjHMNq1B9h0dn8QAppTCzpF5g9uEQpvh8TdjVoCoIn4wKXNJjO7Bs3hQsXE0Tvt8DZunP0/RqFsECMyom
+  azure-native:location: uksouth
+  azure-native:subscriptionId: a374fc43-918b-4f3c-91cf-7b6a140ccc05
+  azure-native:tenantId: 55ffd01f-fa67-4ed5-9c12-dbda80d07eba
