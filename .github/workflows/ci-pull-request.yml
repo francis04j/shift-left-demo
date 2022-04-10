@@ -62,7 +62,7 @@ jobs:
         uses: pulumi/action-install-pulumi-cli@v1.1.0
 
       - name: Set Pulumi config values
-        working-directory: ./DanApi.Infra
+        working-directory: DanApi.Infra
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
         run: |
@@ -74,7 +74,7 @@ jobs:
         with:
           command: preview
           stack-name: dev
-          work-dir: ./DanApi.infra
+          work-dir: DanApi.infra
           github-token: ${{ secrets.GITHUB_TOKEN }}
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
