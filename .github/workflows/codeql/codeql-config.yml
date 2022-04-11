@@ -1,9 +1,0 @@
-name: "default"
-
-languages: csharp
-
-queries:
-  - name: Extended Security
-    uses: security-extended
-  - name: Security and Quality
-    uses: security-and-quality
