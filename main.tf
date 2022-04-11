@@ -13,8 +13,8 @@ terraform {
 
 terraform {
   backend "azurerm" {
-    resource_group_name = "terra_blobstore"
-    storage_account_name = "trfstoragefrancis"
+    resource_group_name = "trf_rg_blobstore"
+    storage_account_name = "trfdanapistorageaccount"
     container_name = "tfstate"
     key = "terraform.tfstate"
   }
