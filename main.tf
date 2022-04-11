@@ -20,6 +20,11 @@ terraform {
   }
 }
 
+variable "imageid" {
+  type = string
+  description = "image version id from az docker build"
+}
+
 resource "azurerm_resource_group" "dan_api" {
   name = "terraform_rg"
   location = "uksouth"
@@ -37,7 +42,7 @@ resource "azurerm_container_group" "dan_api" {
 
 container {
     name   = "danapi"
-    image  = "francis04j/danapi:v1"
+    image  = "francis04j/danapi:${var.imageid}"
     cpu    = "1"
     memory = "1"
 
