@@ -1,0 +1,15 @@
+nav {
+  padding: 1rem;
+}
+
+nav > a {
+  padding: 0.5rem;
+}
+
+nav > a.link-active {
+  font-weight: bold;
+}
+
+main {
+  padding: 1rem;
+}

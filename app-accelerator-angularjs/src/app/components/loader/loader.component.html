@@ -1,0 +1,7 @@
+<div *ngIf="monitor.isActive; else valueExists">
+    <div>Let's wait 5 sec...</div>
+    <div class="loading-spinner"></div>
+</div>
+<ng-template #valueExists>
+    value is: {{value}}
+</ng-template>
